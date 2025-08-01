@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Agency - Advanced Creative Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background-color: var(--light-color);
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .navbar {
+            transition: all 0.4s ease-in-out;
+        }
+        
+        .navbar.scrolled {
+            background-color: var(--dark-color) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+            color: white;
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline-light:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        
+        .service-card, .portfolio-item, .team-member, .testimonial-card, .contact-info, .contact-form-card, .about-content, .about-image {
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(44, 62, 80, 0.15);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .portfolio-img {
+            transition: all 0.4s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(52, 152, 219, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            transform: scale(0.9);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.15) rotate(3deg);
+        }
+        
+        .team-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover .team-img {
+            transform: scale(1.1);
+        }
+        
+        .testimonial-card {
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .testimonial-card p.fst-italic {
+            flex-grow: 1;
+        }
+        
+        .client-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 4px solid var(--light-color);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        footer a.text-white-50:hover {
+            color: white !important;
+            text-decoration: underline;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            color: white;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fs-4" href="#">Prime Agency</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section text-center">
+        <div id="particles-js"></div>
+        <div class="container hero-content">
+            <h1 class="display-3 fw-bold mb-4">We Create Amazing Digital Experiences</h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 600px;">Prime Agency is a full-service creative agency specializing in branding, web design, and digital marketing solutions that drive results.</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="#contact" class="btn btn-primary btn-lg px-4">Get Started</a>
+                <a href="#services" class="btn btn-outline-light btn-lg px-4">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-5">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Our Services</h2>
+                <p class="lead text-muted mb-5">We offer comprehensive services to help your business grow</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="card service-card h-100 fade-in"><div class="card-body text-center p-4"><div class="service-icon"><i class="fas fa-paint-brush"></i></div><h4 class="card-title">Branding</h4><p class="card-text">We create powerful brand identities that resonate with your target audience and differentiate you from competitors.</p></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="card service-card h-100 fade-in"><div class="card-body text-center p-4"><div class="service-icon"><i class="fas fa-laptop-code"></i></div><h4 class="card-title">Web Design</h4><p class="card-text">Beautiful, responsive websites designed to convert visitors into customers and grow your online presence.</p></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="card service-card h-100 fade-in"><div class="card-body text-center p-4"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h4 class="card-title">Digital Marketing</h4><p class="card-text">Data-driven marketing strategies that increase visibility, generate leads, and drive sales for your business.</p></div></div></div>
+                <div class="col-lg-4 col-md-6 mt-4"><div class="card service-card h-100 fade-in"><div class="card-body text-center p-4"><div class="service-icon"><i class="fas fa-mobile-alt"></i></div><h4 class="card-title">App Development</h4><p class="card-text">Custom mobile applications built for iOS and Android platforms to engage your customers on the go.</p></div></div></div>
+                <div class="col-lg-4 col-md-6 mt-4"><div class="card service-card h-100 fade-in"><div class="card-body text-center p-4"><div class="service-icon"><i class="fas fa-search"></i></div><h4 class="card-title">SEO Optimization</h4><p class="card-text">Improve your search engine rankings and organic traffic with our proven SEO strategies.</p></div></div></div>
+                <div class="col-lg-4 col-md-6 mt-4"><div class="card service-card h-100 fade-in"><div class="card-body text-center p-4"><div class="service-icon"><i class="fas fa-bullhorn"></i></div><h4 class="card-title">Social Media</h4><p class="card-text">Strategic social media management and advertising to build your brand and connect with customers.</p></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Our Portfolio</h2>
+                <p class="lead text-muted mb-5">Check out some of our recent work</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project1/400/300" alt="Project 1" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>E-commerce Website</h4><p>Branding & Web Design</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project2/400/300" alt="Project 2" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>Mobile Application</h4><p>UI/UX Design</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project3/400/300" alt="Project 3" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>Corporate Branding</h4><p>Brand Identity</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project4/400/300" alt="Project 4" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>Marketing Campaign</h4><p>Digital Marketing</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project5/400/300" alt="Project 5" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>Restaurant Website</h4><p>Web Design</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project6/400/300" alt="Project 6" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>Product Packaging</h4><p>Graphic Design</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project7/400/300" alt="Project 7" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>Analytics Dashboard</h4><p>UI/UX & Development</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project8/400/300" alt="Project 8" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>SaaS Platform</h4><p>Web Application</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="portfolio-item fade-in"><img src="https://picsum.photos/seed/project9/400/300" alt="Project 9" class="img-fluid portfolio-img"><div class="portfolio-overlay"><div class="text-center text-white p-3"><h4>Non-Profit Website</h4><p>Web Design & CMS</p><a href="#" class="btn btn-light">View Project</a></div></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 fade-in about-content">
+                    <h2 class="section-title text-start" style="margin-left:0; transform: translateX(0);">About Us</h2>
+                    <p class="lead">We're a team of creative professionals passionate about delivering exceptional results.</p>
+                    <p>Founded in 2010, Prime Agency has grown from a small design studio to a full-service digital agency serving clients worldwide. Our approach combines strategic thinking with creative execution to deliver solutions that drive business growth.</p>
+                    <p>We believe in building long-term relationships with our clients by delivering measurable results and exceptional customer service. Our team stays at the forefront of industry trends to ensure we're always providing cutting-edge solutions.</p>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 fade-in about-image">
+                    <img src="https://picsum.photos/seed/about/600/400" alt="About Us" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Meet Our Team</h2>
+                <p class="lead text-muted mb-5">The talented people behind our success</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="team-member text-center fade-in"><img src="https://picsum.photos/seed/team1/150/150" alt="Team Member" class="team-img"><h4>John Smith</h4><p class="text-primary">CEO & Founder</p><p>With over 15 years of experience, John leads our agency with vision and passion.</p><div class="social-links"><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-member text-center fade-in"><img src="https://picsum.photos/seed/team2/150/150" alt="Team Member" class="team-img"><h4>Sarah Johnson</h4><p class="text-primary">Creative Director</p><p>Sarah brings artistic talent and strategic thinking to every project.</p><div class="social-links"><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="team-member text-center fade-in"><img src="https://picsum.photos/seed/team3/150/150" alt="Team Member" class="team-img"><h4>Michael Chen</h4><p class="text-primary">Lead Developer</p><p>Michael's technical expertise ensures our digital solutions are robust and innovative.</p><div class="social-links"><a href="#" class="social-icon"><i class="fab fa-github"></i></a><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-5">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Client Testimonials</h2>
+                <p class="lead text-muted mb-5">What our clients say about us</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 d-flex align-items-stretch"><div class="testimonial-card fade-in"><div class="d-flex align-items-center mb-4"><img src="https://picsum.photos/seed/client1/80/80" alt="Client" class="client-img"><div><h5>David Wilson</h5><p class="text-muted mb-0">CEO, TechStart Inc.</p></div></div><p class="mb-0 fst-italic">"Prime Agency transformed our online presence. Their strategic approach resulted in a 40% increase in leads within the first three months."</p><div class="rating mt-3 text-warning"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+                <div class="col-lg-6 d-flex align-items-stretch"><div class="testimonial-card fade-in"><div class="d-flex align-items-center mb-4"><img src="https://picsum.photos/seed/client2/80/80" alt="Client" class="client-img"><div><h5>Emily Rodriguez</h5><p class="text-muted mb-0">Marketing Director, Bloom Cosmetics</p></div></div><p class="mb-0 fst-italic">"Working with Prime Agency has been a game-changer. Their creative campaigns have doubled our engagement rates and significantly increased sales."</p><div class="rating mt-3 text-warning"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div></div>
+                <div class="col-lg-6 d-flex align-items-stretch mt-4"><div class="testimonial-card fade-in"><div class="d-flex align-items-center mb-4"><img src="https://picsum.photos/seed/client3/80/80" alt="Client" class="client-img"><div><h5>Robert Thompson</h5><p class="text-muted mb-0">Founder, GreenEats</p></div></div><p class="mb-0 fst-italic">"The mobile app developed by Prime Agency exceeded our expectations. Their team understood our vision perfectly and delivered a user-friendly, feature-rich application ahead of schedule."</p><div class="rating mt-3 text-warning"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+                <div class="col-lg-6 d-flex align-items-stretch mt-4"><div class="testimonial-card fade-in"><div class="d-flex align-items-center mb-4"><img src="https://picsum.photos/seed/client4/80/80" alt="Client" class="client-img"><div><h5>Jennifer Lee</h5><p class="text-muted mb-0">Director, Urban Fitness</p></div></div><p class="mb-0 fst-italic">"Prime Agency's SEO services have dramatically improved our search rankings. We're now ranking on the first page for our target keywords, resulting in a steady stream of qualified leads."</p><div class="rating mt-3 text-warning"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;">
+                    Have a project in mind or just want to say hello? We're here to help you turn your ideas into reality. Fill out the form below or reach out to us through our contact details, and a member of our team will get back to you as soon as possible.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 fade-in">
+                    <div class="contact-info">
+                        <div class="d-flex align-items-start mb-4"><i class="contact-icon fas fa-map-marker-alt mt-1"></i><div><h5>Address</h5><p class="mb-0 text-muted">123 Creative Street, Design District<br>New York, NY 10001</p></div></div>
+                        <div class="d-flex align-items-start mb-4"><i class="contact-icon fas fa-phone-alt mt-1"></i><div><h5>Phone</h5><p class="mb-0 text-muted">+1 (555) 123-4567</p></div></div>
+                        <div class="d-flex align-items-start mb-4"><i class="contact-icon fas fa-envelope mt-1"></i><div><h5>Email</h5><p class="mb-0 text-muted">info@primeagency.com</p></div></div>
+                        <div class="d-flex align-items-start"><i class="contact-icon fas fa-clock mt-1"></i><div><h5>Working Hours</h5><p class="mb-0 text-muted">Monday - Friday: 9am - 6pm</p></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-7 mt-5 mt-lg-0 fade-in">
+                    <div class="card shadow-sm contact-form-card">
+                        <div class="card-body p-4">
+                            <form>
+                                <div class="row"><div class="col-md-6 mb-3"><label for="name" class="form-label">Your Name</label><input type="text" class="form-control" id="name" required></div><div class="col-md-6 mb-3"><label for="email" class="form-label">Your Email</label><input type="email" class="form-control" id="email" required></div></div>
+                                <div class="mb-3"><label for="subject" class="form-label">Subject</label><input type="text" class="form-control" id="subject" required></div>
+                                <div class="mb-3"><label for="message" class="form-label">Message</label><textarea class="form-control" id="message" rows="5" required></textarea></div>
+                                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-white mb-4">Prime Agency</h4>
+                    <p class="text-white-50">A full-service creative agency dedicated to building brands, crafting digital experiences, and driving business growth through innovative solutions.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a><a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white-50">Services</a></li>
+                        <li class="mb-2"><a href="#portfolio" class="text-white-50">Portfolio</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white-50">About</a></li>
+                        <li class="mb-2"><a href="#team" class="text-white-50">Team</a></li>
+                        <li><a href="#contact" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <h5 class="text-white mb-4">Our Services</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#services" class="text-white-50">Branding</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white-50">Web Design</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white-50">Digital Marketing</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white-50">App Development</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white-50">SEO Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="text-white-50">Subscribe for the latest updates.</p>
+                    <form class="mt-4">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your Email" style="background-color: rgba(255,255,255,0.2); border: none; color: white;">
+                            <button class="btn btn-primary" type="submit">Go</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-5 mb-4" style="border-color: rgba(255, 255, 255, 0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; 2025 Prime Agency. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 text-white-50">Designed with <i class="fas fa-heart text-danger"></i> by Prime Agency</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+        // Particles.js configuration
+        particlesJS('particles-js', {
+          "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.5, "random": false },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+            "move": { "enable": true, "speed": 6, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+            "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+          },
+          "retina_detect": true
+        });
+
+        // Scroll-reveal animations using Intersection Observer
+        const faders = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // We can unobserve the element after it has become visible, 
+                    // so the animation doesn't re-trigger.
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // We need to re-query the faders and observe them after new content might be added dynamically,
+        // but for this static case, we just run it once on page load.
+        document.querySelectorAll('.fade-in').forEach(fader => {
+            observer.observe(fader);
+        });
+    </script>
+</body>
+</html>
